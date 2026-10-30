@@ -10,33 +10,63 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CosmologyRouteImport } from './routes/cosmology'
+import { Route as DataRouteImport } from './routes/data'
+import { Route as ParticlesRouteImport } from './routes/particles'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CosmologyRoute = CosmologyRouteImport.update({
+  id: '/cosmology',
+  path: '/cosmology',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DataRoute = DataRouteImport.update({
+  id: '/data',
+  path: '/data',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ParticlesRoute = ParticlesRouteImport.update({
+  id: '/particles',
+  path: '/particles',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/cosmology': typeof CosmologyRoute
+  '/data': typeof DataRoute
+  '/particles': typeof ParticlesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/cosmology': typeof CosmologyRoute
+  '/data': typeof DataRoute
+  '/particles': typeof ParticlesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/cosmology': typeof CosmologyRoute
+  '/data': typeof DataRoute
+  '/particles': typeof ParticlesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/cosmology' | '/data' | '/particles'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/cosmology' | '/data' | '/particles'
+  id: '__root__' | '/' | '/cosmology' | '/data' | '/particles'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CosmologyRoute: typeof CosmologyRoute
+  DataRoute: typeof DataRoute
+  ParticlesRoute: typeof ParticlesRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +78,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cosmology': {
+      id: '/cosmology'
+      path: '/cosmology'
+      fullPath: '/cosmology'
+      preLoaderRoute: typeof CosmologyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/data': {
+      id: '/data'
+      path: '/data'
+      fullPath: '/data'
+      preLoaderRoute: typeof DataRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/particles': {
+      id: '/particles'
+      path: '/particles'
+      fullPath: '/particles'
+      preLoaderRoute: typeof ParticlesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CosmologyRoute: CosmologyRoute,
+  DataRoute: DataRoute,
+  ParticlesRoute: ParticlesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
