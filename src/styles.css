@@ -63,23 +63,23 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
-  --card: oklch(1 0 0);
+  --background: oklch(0.14 0.03 260);
+  --foreground: oklch(0.96 0.01 250);
+  --card: oklch(0.19 0.035 260);
   --card-foreground: oklch(0.129 0.042 264.695);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
+  --primary: oklch(0.8 0.15 200);
   --primary-foreground: oklch(0.984 0.003 247.858);
   --secondary: oklch(0.968 0.007 247.896);
   --secondary-foreground: oklch(0.208 0.042 265.755);
   --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
+  --muted-foreground: oklch(0.7 0.03 250);
   --accent: oklch(0.968 0.007 247.896);
   --accent-foreground: oklch(0.208 0.042 265.755);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
+  --border: oklch(0.3 0.03 260);
   --input: oklch(0.929 0.013 255.508);
   --ring: oklch(0.704 0.04 256.788);
   --chart-1: oklch(0.646 0.222 41.116);
@@ -142,3 +142,19 @@
     color: var(--color-foreground);
   }
 }
+
+@utility bg-cosmos {
+  background: radial-gradient(ellipse at top, color-mix(in oklab, var(--primary) 18%, transparent), transparent 60%), var(--background);
+}
+@utility panel {
+  background: color-mix(in oklab, var(--card) 85%, transparent);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 20px 50px -20px color-mix(in oklab, var(--primary) 35%, transparent);
+  transition: transform .2s, box-shadow .2s;
+  &:hover { transform: translateY(-2px); }
+}
+@utility text-glow {
+  background: linear-gradient(90deg, var(--foreground), var(--primary));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+input[type="range"] { accent-color: var(--primary); cursor: pointer; }
