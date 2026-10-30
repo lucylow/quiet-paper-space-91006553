@@ -40,6 +40,9 @@ function Index() {
           <Link to="/particles" className="inline-flex rounded-md border px-4 py-2 text-sm font-medium">
             Particle Physics Center →
           </Link>
+          <Link to="/materials" className="inline-flex rounded-md border px-4 py-2 text-sm font-medium">
+            Materials Intelligence →
+          </Link>
         </div>
 
 
