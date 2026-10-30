@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { MATERIALS, benchmark, buildCrystal, crystalGraph, cubicElastic, debyeCv, density, dos, energyAboveHull, initMD, mdEnergy, mdStep, tbEnergy, validateStructure } from "@/lib/materials";
 
-const cn = (lattice: "sc" | "bcc" | "fcc" | "diamond" | "rocksalt") => crystalGraph(buildCrystal({ lattice, a: 4, elements: lattice === "rocksalt" ? ["Na", "Cl"] : ["Cu"] }, 2), 8).coordination[0];
+const cn = (lattice: "sc" | "bcc" | "fcc" | "diamond" | "rocksalt") => crystalGraph(buildCrystal({ lattice, a: 4, elements: lattice === "rocksalt" ? ["Na", "Cl"] : ["Cu"] }, 3), 12).coordination[0];
 
 describe("materials engine", () => {
   it("coordination numbers: sc 6, bcc 8, fcc 12, diamond 4, rocksalt 6", () => {

@@ -120,7 +120,7 @@ export function featurize(m: Pick<Material, "elements" | "lattice" | "a">): numb
   const chiDiff = d.length > 1 ? Math.abs(d[0].chi - d[1].chi) : 0;
   const rMean = d.reduce((s, x) => s + x.r, 0) / d.length;
   const zMean = d.reduce((s, x) => s + x.Z, 0) / d.length / 50;
-  const cn = crystalGraph(buildCrystal({ ...m, a: m.a }, 2), m.a * 2).coordination[0] / 12;
+  const cn = crystalGraph(buildCrystal(m, 3), m.a * 3).coordination[0] / 12;
   return [chiMean / 4, chiDiff / 3, rMean / 2.5, zMean, cn, m.a / 7, ...LATTICES.map((l) => (l === m.lattice ? 0.3 : 0))];
 }
 const sqd = (a: number[], b: number[]) => a.reduce((s, v, i) => s + (v - b[i]) ** 2, 0);
