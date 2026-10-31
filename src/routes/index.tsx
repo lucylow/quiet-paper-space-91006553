@@ -43,6 +43,9 @@ function Index() {
           <Link to="/materials" className="inline-flex rounded-md border px-4 py-2 text-sm font-medium">
             Materials Intelligence →
           </Link>
+          <Link to="/plasma" className="inline-flex rounded-md border px-4 py-2 text-sm font-medium">
+            Plasma & Fusion →
+          </Link>
         </div>
 
 
