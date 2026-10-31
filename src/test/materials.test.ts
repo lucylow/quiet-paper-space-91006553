@@ -1,17 +1,18 @@
 import { describe, expect, it } from "vitest";
 import { MATERIALS, benchmark, buildCrystal, crystalGraph, cubicElastic, debyeCv, density, dos, energyAboveHull, initMD, mdEnergy, mdStep, tbEnergy, validateStructure } from "@/lib/materials";
 
+const SI = MATERIALS[0]!;
 const cn = (lattice: "sc" | "bcc" | "fcc" | "diamond" | "rocksalt") => crystalGraph(buildCrystal({ lattice, a: 4, elements: lattice === "rocksalt" ? ["Na", "Cl"] : ["Cu"] }, 3), 12).coordination[0];
 
 describe("materials engine", () => {
   it("coordination numbers: sc 6, bcc 8, fcc 12, diamond 4, rocksalt 6", () => {
     expect(cn("sc")).toBe(6); expect(cn("bcc")).toBe(8); expect(cn("fcc")).toBe(12); expect(cn("diamond")).toBe(4); expect(cn("rocksalt")).toBe(6);
   });
-  it("Si density ≈ 2.33 g/cm³", () => expect(density(MATERIALS[0])).toBeCloseTo(2.33, 1));
+  it("Si density ≈ 2.33 g/cm³", () => expect(density(SI)).toBeCloseTo(2.33, 1));
   it("flags overlapping atoms", () => {
-    const atoms = [...buildCrystal(MATERIALS[0]), { el: "Si", pos: [0.3, 0, 0] as [number, number, number] }];
-    expect(validateStructure(atoms, MATERIALS[0].a).valid).toBe(false);
-    expect(validateStructure(buildCrystal(MATERIALS[0], 2), 2 * MATERIALS[0].a).valid).toBe(true);
+    const atoms = [...buildCrystal(SI), { el: "Si", pos: [0.3, 0, 0] as [number, number, number] }];
+    expect(validateStructure(atoms, SI.a).valid).toBe(false);
+    expect(validateStructure(buildCrystal(SI, 2), 2 * SI.a).valid).toBe(true);
   });
   it("simple cubic s-band spans 12t", () => {
     expect(tbEnergy("sc", [0, 0, 0])).toBe(-6);
